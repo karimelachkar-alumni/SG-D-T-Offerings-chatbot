@@ -1,0 +1,480 @@
+/* SG D&T AI Co-Pilot - Simplified Styling */
+
+:root {
+  /* Professional Color Palette */
+  --primary-color: #2c5aa0;
+  --secondary-color: #34495e;
+  --accent-color: #3498db;
+  --success-color: #27ae60;
+  --warning-color: #f39c12;
+  --danger-color: #e74c3c;
+  --light-gray: #f8f9fa;
+  --medium-gray: #6c757d;
+  --dark-gray: #343a40;
+  --card-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  --border-radius: 8px;
+  --transition: all 0.3s ease;
+}
+
+/* Global Styles */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+  background-color: var(--light-gray);
+  color: var(--dark-gray);
+}
+
+.h-100 {
+  height: 100vh !important;
+}
+
+/* Main Content */
+.main-content {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  padding: 0;
+}
+
+/* Header */
+.chat-header {
+  background: white;
+  padding: 1.5rem 2rem;
+  border-bottom: 1px solid #e9ecef;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.chat-header h2 {
+  color: var(--primary-color);
+  font-weight: 600;
+}
+
+.mode-toggle .btn-group {
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.mode-toggle .btn-check:checked + .btn {
+  background-color: var(--primary-color);
+  border-color: var(--primary-color);
+  color: white;
+}
+
+/* Chat Interface */
+.chat-interface {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  height: calc(100vh - 120px); /* Subtract header height */
+}
+
+.chat-container {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  max-width: 1200px;
+  margin: 0 auto;
+  width: 100%;
+  padding: 0 2rem;
+  height: 100%;
+}
+
+/* Chat Messages */
+.chat-messages {
+  flex: 1;
+  overflow-y: auto;
+  padding: 2rem 0 1rem 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  min-height: 0; /* Allow flex shrinking */
+}
+
+.message {
+  display: flex;
+  gap: 1rem;
+  max-width: 80%;
+}
+
+.ai-message {
+  align-self: flex-start;
+}
+
+.user-message {
+  align-self: flex-end;
+  flex-direction: row-reverse;
+}
+
+.message-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.ai-message .message-avatar {
+  background: linear-gradient(
+    135deg,
+    var(--primary-color),
+    var(--accent-color)
+  );
+  color: white;
+}
+
+.user-message .message-avatar {
+  background: var(--medium-gray);
+  color: white;
+}
+
+.message-content {
+  background: white;
+  padding: 1rem 1.5rem;
+  border-radius: var(--border-radius);
+  box-shadow: var(--card-shadow);
+  flex: 1;
+}
+
+.user-message .message-content {
+  background: var(--primary-color);
+  color: white;
+}
+
+.message-content p {
+  margin-bottom: 0.5rem;
+}
+
+.message-content p:last-child {
+  margin-bottom: 0;
+}
+
+.message-content ul {
+  margin-bottom: 0;
+  padding-left: 1.5rem;
+}
+
+.message-content li {
+  margin-bottom: 0.25rem;
+}
+
+/* Chat Input */
+.chat-input-container {
+  background: white;
+  padding: 1.5rem 0;
+  border-top: 1px solid #e9ecef;
+  flex-shrink: 0; /* Prevent shrinking */
+  margin-top: auto; /* Push to bottom */
+}
+
+.input-group {
+  max-width: 100%;
+}
+
+.input-group textarea {
+  border-radius: var(--border-radius) 0 0 var(--border-radius);
+  border-right: none;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.input-group button {
+  border-radius: 0 var(--border-radius) var(--border-radius) 0;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.conversation-status {
+  text-align: center;
+}
+
+/* Welcome Message */
+.welcome-message {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem 0;
+}
+
+.welcome-card {
+  text-align: center;
+  background: white;
+  padding: 3rem;
+  border-radius: var(--border-radius);
+  box-shadow: var(--card-shadow);
+  max-width: 600px;
+}
+
+.welcome-icon {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background: linear-gradient(
+    135deg,
+    var(--primary-color),
+    var(--accent-color)
+  );
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 1.5rem;
+  font-size: 2rem;
+}
+
+.welcome-card h3 {
+  color: var(--primary-color);
+  margin-bottom: 1rem;
+}
+
+.welcome-card .lead {
+  color: var(--medium-gray);
+  margin-bottom: 0;
+}
+
+/* Modals */
+.modal-content {
+  border-radius: var(--border-radius);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+.modal-header {
+  background: var(--light-gray);
+  border-bottom: 1px solid #e9ecef;
+}
+
+.modal-title {
+  color: var(--primary-color);
+  font-weight: 600;
+}
+
+.progress {
+  border-radius: var(--border-radius);
+  background-color: #e9ecef;
+}
+
+.progress-bar {
+  background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
+}
+
+.current-stage {
+  font-weight: 500;
+  color: var(--dark-gray);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .chat-header {
+    padding: 1rem;
+  }
+
+  .chat-header .d-flex {
+    flex-direction: column;
+    gap: 1rem;
+    align-items: flex-start !important;
+  }
+
+  .chat-container {
+    padding: 0 1rem;
+  }
+
+  .message {
+    max-width: 95%;
+  }
+
+  .welcome-card {
+    padding: 2rem;
+    margin: 0 1rem;
+  }
+}
+
+/* Loading States */
+.loading {
+  opacity: 0.6;
+  pointer-events: none;
+}
+
+.spinner-border-sm {
+  width: 1rem;
+  height: 1rem;
+}
+
+/* Button Hover Effects */
+.btn {
+  transition: var(--transition);
+}
+
+.btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+/* Focus States */
+.form-control:focus {
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 0.2rem rgba(44, 90, 160, 0.25);
+}
+
+/* Scrollbar Styling */
+.chat-messages::-webkit-scrollbar {
+  width: 6px;
+}
+
+.chat-messages::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 3px;
+}
+
+.chat-messages::-webkit-scrollbar-thumb {
+  background: var(--medium-gray);
+  border-radius: 3px;
+}
+
+.chat-messages::-webkit-scrollbar-thumb:hover {
+  background: var(--dark-gray);
+}
+
+/* Service Recommendations Styles */
+.services-message {
+  margin-bottom: 20px;
+}
+
+.recommended-services {
+  background: #f8f9fa;
+  border-radius: 12px;
+  padding: 20px;
+  border: 1px solid #e9ecef;
+}
+
+.recommended-services h5 {
+  color: var(--primary-color);
+  margin-bottom: 20px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+}
+
+.service-card {
+  background: white;
+  border-radius: 8px;
+  padding: 16px;
+  margin-bottom: 16px;
+  border: 1px solid #e9ecef;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  transition: box-shadow 0.2s ease;
+}
+
+.service-card:hover {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.service-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.service-name {
+  color: var(--primary-color);
+  font-weight: 600;
+  margin: 0;
+  font-size: 1.1rem;
+}
+
+.service-confidence {
+  background: #e8f5e8;
+  color: #2d5a2d;
+  padding: 4px 8px;
+  border-radius: 12px;
+  font-size: 0.85rem;
+  font-weight: 500;
+}
+
+.service-description {
+  color: #666;
+  margin-bottom: 16px;
+  line-height: 1.5;
+}
+
+.service-estimates {
+  background: #f8f9fa;
+  border-radius: 6px;
+  padding: 12px;
+  margin-bottom: 12px;
+}
+
+.service-estimates h6 {
+  color: var(--primary-color);
+  margin-bottom: 8px;
+  font-size: 0.95rem;
+  font-weight: 600;
+}
+
+.estimates-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 8px;
+}
+
+.estimate-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.9rem;
+  color: #555;
+}
+
+.estimate-item i {
+  color: var(--primary-color);
+  width: 16px;
+}
+
+.scope-assumptions,
+.next-steps {
+  margin-bottom: 12px;
+}
+
+.scope-assumptions h6,
+.next-steps h6 {
+  color: var(--primary-color);
+  margin-bottom: 8px;
+  font-size: 0.95rem;
+  font-weight: 600;
+}
+
+.scope-assumptions ul,
+.next-steps ul {
+  margin: 0;
+  padding-left: 20px;
+}
+
+.scope-assumptions li,
+.next-steps li {
+  color: #666;
+  margin-bottom: 4px;
+  line-height: 1.4;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .service-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .estimates-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .recommended-services {
+    padding: 16px;
+  }
+}

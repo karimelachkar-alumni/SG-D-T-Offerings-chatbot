@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SG D&T AI Co-Pilot</title>
+
+    <!-- Bootstrap CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <!-- Font Awesome -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <!-- Custom CSS -->
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/style.css') }}"
+    />
+  </head>
+  <body>
+    <div class="container-fluid h-100">
+      <div class="row h-100">
+        <!-- Main Content - Full Width -->
+        <div class="col-12 main-content">
+          <!-- Header -->
+          <div class="chat-header">
+            <div class="d-flex justify-content-between align-items-center">
+              <div>
+                <h2 class="mb-0">SG D&T AI Co-Pilot</h2>
+                <p class="text-muted mb-0">
+                  Intelligent consultative selling assistant
+                </p>
+              </div>
+              <div class="mode-toggle">
+                <div class="btn-group" role="group">
+                  <input
+                    type="radio"
+                    class="btn-check"
+                    name="mode"
+                    id="conversational-mode"
+                    value="conversational"
+                    checked
+                  />
+                  <label
+                    class="btn btn-outline-primary"
+                    for="conversational-mode"
+                  >
+                    <i class="fas fa-comments me-2"></i>Chat
+                  </label>
+                  <input
+                    type="radio"
+                    class="btn-check"
+                    name="mode"
+                    id="analysis-mode"
+                    value="analysis"
+                  />
+                  <label class="btn btn-outline-primary" for="analysis-mode">
+                    <i class="fas fa-chart-line me-2"></i>Analysis
+                  </label>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Chat Interface -->
+          <div id="conversational-interface" class="chat-interface">
+            <div class="chat-container">
+              <div class="chat-messages" id="chat-messages">
+                <div class="message ai-message">
+                  <div class="message-avatar">
+                    <i class="fas fa-robot"></i>
+                  </div>
+                  <div class="message-content">
+                    <p>
+                      Hello! I'm your AI Co-Pilot for consultative selling. I'm
+                      here to help you understand your client's business
+                      challenges and recommend the right D&T services for their
+                      organization.
+                    </p>
+                    <p>
+                      Let's start with your client situation. Could you share:
+                    </p>
+                    <ul>
+                      <li>What organization are you working with?</li>
+                      <li>What business problems are they trying to solve?</li>
+                      <li>What's driving their need for change right now?</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+
+              <div class="chat-input-container">
+                <div class="input-group">
+                  <textarea
+                    class="form-control"
+                    id="chat-input"
+                    placeholder="Type your message here..."
+                    rows="2"
+                    style="resize: none"
+                  ></textarea>
+                  <button
+                    class="btn btn-primary"
+                    type="button"
+                    id="send-message-btn"
+                  >
+                    <i class="fas fa-paper-plane"></i>
+                  </button>
+                </div>
+                <div class="conversation-status mt-2">
+                  <small class="text-muted" id="conversation-phase">
+                    Ready to help with your business challenges
+                  </small>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Analysis Interface -->
+          <div
+            id="analysis-interface"
+            class="chat-interface"
+            style="display: none"
+          >
+            <div class="chat-container">
+              <div class="welcome-message">
+                <div class="welcome-card">
+                  <div class="welcome-icon">
+                    <i class="fas fa-handshake"></i>
+                  </div>
+                  <h3>Full Analysis Mode</h3>
+                  <p class="lead">
+                    Paste your client meeting notes or business requirements for
+                    comprehensive analysis
+                  </p>
+                </div>
+              </div>
+
+              <div class="chat-input-container">
+                <div class="input-group">
+                  <textarea
+                    class="form-control"
+                    id="clientInput"
+                    placeholder="Paste your client meeting notes, conversation transcript, or business requirements here..."
+                    rows="4"
+                  ></textarea>
+                  <button
+                    class="btn btn-primary"
+                    type="button"
+                    id="startConsultation"
+                  >
+                    <i class="fas fa-rocket me-2"></i>
+                    Start Analysis
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Progress Modal -->
+    <div
+      class="modal fade"
+      id="progressModal"
+      tabindex="-1"
+      aria-labelledby="progressModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="progressModalLabel">
+              <i class="fas fa-cogs me-2"></i>AI Co-Pilot Processing
+            </h5>
+          </div>
+          <div class="modal-body">
+            <div class="progress mb-3" style="height: 25px">
+              <div
+                class="progress-bar progress-bar-striped progress-bar-animated"
+                role="progressbar"
+                style="width: 0%"
+                id="progressBar"
+              >
+                0%
+              </div>
+            </div>
+            <div class="current-stage" id="currentStage">
+              <i class="fas fa-spinner fa-spin me-2"></i>
+              Initializing AI Co-Pilot...
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Results Modal -->
+    <div
+      class="modal fade"
+      id="resultsModal"
+      tabindex="-1"
+      aria-labelledby="resultsModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="resultsModalLabel">
+              <i class="fas fa-chart-line me-2"></i>Analysis Results
+            </h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body" id="resultsContent">
+            <!-- Results will be populated here -->
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+            >
+              Close
+            </button>
+            <button type="button" class="btn btn-primary" id="exportResults">
+              <i class="fas fa-download me-2"></i>Export Results
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Socket.IO -->
+    <script src="https://cdn.socket.io/4.7.2/socket.io.min.js"></script>
+    <!-- Custom JS -->
+    <script src="{{ url_for('static', filename='js/app.js') }}"></script>
+  </body>
+</html>
