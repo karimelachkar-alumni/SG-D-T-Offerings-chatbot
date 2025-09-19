@@ -26,7 +26,7 @@ logger = logging.getLogger(__name__)
 
 # Initialize Flask app
 app = Flask(__name__)
-app.config['SECRET_KEY'] = 'sg-dt-ai-copilot-demo-2025'
+app.config['SECRET_KEY'] = os.getenv('SECRET_KEY', 'fallback-secret-key-change-in-production')
 app.config['DEBUG'] = True
 
 # Enable CORS and SocketIO
